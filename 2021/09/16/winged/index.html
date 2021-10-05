@@ -6,17 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Archives: 2021 | Lin的博客</title>
+  <title>winged 框架学习 | Lin的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="不积跬步无以至千里">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Lin的博客">
-<meta property="og:url" content="http://example.com/archives/2021/index.html">
+  <meta name="description" content="前言 Winged 是一个跨平台、现代化、ts-first 的泛前端框架，目前支持微信小程序、网页开发。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="winged 框架学习">
+<meta property="og:url" content="http://example.com/2021/09/16/winged/index.html">
 <meta property="og:site_name" content="Lin的博客">
-<meta property="og:description" content="不积跬步无以至千里">
+<meta property="og:description" content="前言 Winged 是一个跨平台、现代化、ts-first 的泛前端框架，目前支持微信小程序、网页开发。">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-09-16T08:11:00.000Z">
+<meta property="article:modified_time" content="2021-10-05T13:56:06.277Z">
 <meta property="article:author" content="Web_lin">
-<meta property="article:tag" content="前端,js,jquery,javascript,html5,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder,Geek,html,css,css3,用户体验">
+<meta property="article:tag" content="winged">
+<meta property="article:tag" content="winged-cli">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Lin的博客" type="application/atom+xml">
@@ -149,36 +152,259 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-winged" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2021" class="archive-year">2021</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/09/16/winged/" class="archive-article-date">
-  	<time datetime="2021-09-16T08:11:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-09-16</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/09/16/winged/">winged 框架学习</a>
+    <h1 class="article-title" itemprop="name">
+      winged 框架学习
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2021/09/16/winged/" class="archive-article-date">
+  	<time datetime="2021-09-16T08:11:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-09-16</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
+<p>Winged 是一个跨平台、现代化、ts-first 的泛前端框架，目前支持微信小程序、网页开发。</p>
+</blockquote>
+<span id="more"></span>
+
+<h2 id="主要功能"><a href="#主要功能" class="headerlink" title="主要功能"></a>主要功能</h2><ul>
+<li><p>es6 class 语法描述视图</p>
+</li>
+<li><p>包含类 html 模版语言。支持双向数据绑定、事件绑定、逻辑表述</p>
+</li>
+<li><p>支持数据变更检测（vWatch）和计算属性（vComputed）<em>eventData</em>: this[‘SE’][‘changetodoitem’]</p>
+</li>
+<li><p>提供组件化能力</p>
+</li>
+<li><p>基于代码生成 t s 类型约束</p>
+</li>
+<li><p>提供命令行接口（winged cli）</p>
+<ul>
+<li><p>创建项目</p>
+</li>
+<li><p>提供开发环境，包括编译功能，本地预览服务器，图片自动上传，关联重命名，过时文件清理等</p>
+</li>
+<li><p>代码生成功能，能够快速生成页面（Page）或组件（Component）所需的各个文件</p>
+</li>
+</ul>
+</li>
+<li><p>提供 tslint 和 tsconfig 最佳实践</p>
+</li>
+</ul>
+<h2 id="项目结构"><a href="#项目结构" class="headerlink" title="项目结构"></a>项目结构</h2><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">  |-src/                          # 源代码目录</span><br><span class="line">  |---html/                       # 存放web使用的html入口文件，通常只会有index.html（小程序中也会有此文件夹，以后会用到，但是现在不用管）</span><br><span class="line">  |---imgs/                       # 存放图片资源的文件夹，cli会自动上传图片到cdn</span><br><span class="line">  |---less/                       # 存放less文件</span><br><span class="line">  |-----base/                     # 存放只被<span class="built_in">require</span>而不需要生成css/wxss的文件</span><br><span class="line">  |-------variables.less</span><br><span class="line">  |-------mixins.less</span><br><span class="line">  |-----components/               # 存放组件使用的less文件</span><br><span class="line">  |-----pages/                    # 存放页面使用的less文件。在小程序中只有这里的的文件会生成对应的wxss</span><br><span class="line">  |-------home-page.less</span><br><span class="line">  |---ts/                         # 存放ts文件</span><br><span class="line">  |-----components/               # 存放组件使用的ts文件</span><br><span class="line">  |-----pages/                    # 存放组件使用的ts文件，在小程序中只有这里的文件会生成对应的wxml</span><br><span class="line">  |-------HomePage.ts</span><br><span class="line">  |-----v/                        # 存放由视图结构文件生成的v文件，文件以.v.ts结尾</span><br><span class="line">  |-------components/             # 存放由组件类视图结构生成的v文件</span><br><span class="line">  |---------InputGroup.v.ts</span><br><span class="line">  |-------pages/                  # 存放由页面类视图结构生成的v文件</span><br><span class="line">  |---------HomePage.v.ts</span><br><span class="line">  |-----app.ts                    # 小程序入口文件</span><br><span class="line">  |-----index.ts                  # 网页入口文件，包含网页路由</span><br><span class="line">  |---viewTpls/                   # 存放视图结构文件，文件为html格式，包含winged独有的逻辑标签和绑定点</span><br><span class="line">  |-----components/               # 存放组件类视图结构</span><br><span class="line">  |-------input-group.html        # 文件名无要求</span><br><span class="line">  |-----pages/                    # 存放页面类视图结构</span><br><span class="line">  |-------home-page.html          # html文件名必须以 -page 结尾</span><br><span class="line">  |-web/                          # 网页输出目录，编译打包后的网页资源会放入此文件夹。此文件夹应该被 search.exclude</span><br><span class="line">  |-wxapp/                        # 小程序输出目录，编译打包后的小程序资源会放入此文件夹。此文件夹应该作为微信开发者工具的根目录</span><br><span class="line">  |---app.json</span><br><span class="line">  |---libs/                       # 库文件代码目录，目前会存放编译好的winged.js文件</span><br><span class="line">  |-----winged.js</span><br><span class="line">  |---components/                 # 组件逻辑代码目录，只有js</span><br><span class="line">  |-----InputGroup.js             # 由 InputGroup.ts 编译生成</span><br><span class="line">  |---pages/                      # 页面资源目录，包括页面逻辑对应的js，和页面的其他资源文件（wxss，wxml）</span><br><span class="line">  |-----home.wxml                 # 由 home-page.html <span class="string">&quot;推导&quot;</span>生成</span><br><span class="line">  |-----home.js                   # 由 HomePage.ts <span class="string">&quot;推导&quot;</span>生成，仅会引用 HomePage.js 并构建页面。页面逻辑在 HomePage.js 中</span><br><span class="line">  |-----home.json                 # 由 HomePage.ts <span class="string">&quot;推导&quot;</span>生成</span><br><span class="line">  |-----home.wxss                 # 由 home-page.less 编译生成</span><br><span class="line">  |-----HomePage.js               # 由 HomePage.ts 编译生成</span><br><span class="line">  |---v/                          # 存放编译好的v文件，供其他文件<span class="built_in">require</span></span><br><span class="line">  |-----...                       # 内容略</span><br><span class="line">  |- winged.json                  # winged项目配置文件，此文件存在时才会被识别为合法的winged项目</span><br><span class="line">  |- devup.sh                     # 开发环境快速启动脚本，执行此文件可以快速运行开发环境</span><br></pre></td></tr></table></figure>
+
+<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><blockquote>
+<p>Winged 和其他框架主要的不同，在于会通过 html 生成对应的 <code>v.ts</code> 文件；<code>v.ts</code>会暴露一个抽象类（typescript abstract class），使用者通过在自己的 ts 文件编写一个类(class)并继承它，来使用<code>Winged</code>提供的功能。</p>
+</blockquote>
+<h3 id="文件概念"><a href="#文件概念" class="headerlink" title="文件概念"></a>文件概念</h3><ul>
+<li><p><a target="_blank" rel="noopener" href="https://www.yuque.com/n_tech/winged/zppy00">视图结构文件</a>（view struct file）**:** 用于生成<code>v.ts</code>文件的 html，也叫或<strong>视图模板</strong>（view tpl, tpl=template）</p>
+</li>
+<li><p><strong>抽象视图文件</strong>（abs view file, abs=abstract）**:<strong>由视图结构文件生成的<code>v.ts</code>文件，也叫</strong>v 文件**(v file)</p>
+</li>
+<li><p><strong>实现视图文件</strong>(impl view file, impl=implementation)<strong>:<strong>将继承并实现这个 v 文件的 ts 文件，也称为</strong>视图类文件</strong>(view class file)</p>
+</li>
+</ul>
+<h3 id="视图结构文件（viewTpl-file）"><a href="#视图结构文件（viewTpl-file）" class="headerlink" title="视图结构文件（viewTpl file）"></a>视图结构文件（viewTpl file）</h3><p>在<code>src/viewTpls/pages/</code>路径下编写 html 结构页面</p>
+<blockquote>
+<p><em>注意：</em>视图结构文件的名称必须采用中划线命名法，采用 html 后缀（小程序中也需要采用 html 后缀）。页面需要以 <code>-page</code> 结尾，但是组件则 <strong>不</strong> 需要以 <code>-component</code> 结尾。</p>
+</blockquote>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">section</span> <span class="attr">id</span>=<span class="string">&quot;book-page&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>Please input book name:<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> @<span class="attr">value</span>=<span class="string">&quot;bookName&quot;</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">If</span> <span class="attr">cond</span>=<span class="string">&quot;tooLong&quot;</span>&gt;</span></span><br><span class="line">    // IF为逻辑节点</span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>Name too long<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Else</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>Hello, &#123;&#123;bookName&#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">If</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">button</span> @<span class="attr">bind:click</span>=<span class="string">&quot;handleSubmit&quot;</span>&gt;</span>Submit<span class="tag">&lt;/<span class="name">button</span>&gt;</span> //@bind:click为虚拟属性</span><br><span class="line"><span class="tag">&lt;/<span class="name">section</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="数据绑定点"><a href="#数据绑定点" class="headerlink" title="数据绑定点"></a>数据绑定点</h4><p>出现位置如下：</p>
+<ul>
+<li><p>任意一般标签和逻辑节点的内容部分，如: <code>&lt;view&gt;&#123;&#123;a&#125;&#125;&lt;/view&gt;</code></p>
+</li>
+<li><p>任意一般标签（不包含逻辑节点）的非虚拟属性部分：如: <code>&lt;image class=&quot;icon &#123;&#123;iconClass&#125;&#125;&quot;src=&quot;&#123;&#123;host&#125;&#125;/a.png&quot;&gt;&lt;/image&gt;</code></p>
+</li>
+</ul>
+<p><strong>注意：</strong>1、不可出现在逻辑节点的属性中。2、不可出现在一般标签的虚拟属性中</p>
+<h5 id="支持语法形式如下"><a href="#支持语法形式如下" class="headerlink" title="支持语法形式如下"></a>支持语法形式如下</h5><ul>
+<li><p>字符串输出: <code>&#123;&#123;name&#125;&#125;</code> 或者 <code>&#123;&#123;user.name&#125;&#125;</code>。</p>
+<ul>
+<li><p>如果为多级路径，前置路径为空时不会报错。</p>
+</li>
+<li><p>目前<strong>不</strong>支持数组下标，比如<code>&#123;&#123;list[1].name&#125;&#125;</code>是不支持的</p>
+</li>
+</ul>
+</li>
+<li><p>或操作： <code>&#123;&#123;a||'a not exists'&#125;&#125;</code></p>
+</li>
+<li><p>三元表达式： <code>&#123;&#123;a == 'yes' ? 'yes':'no'&#125;&#125;</code> 或者 <code>&#123;&#123;a ? a:'a not exists'&#125;&#125;</code></p>
+</li>
+<li><p><strong>注意：</strong>目前在数据点中，值支持变量引用或者字符串，因此写数字或布尔值都会导致错误。比如可以写<code>&#123;&#123;a == 'a'?'yes'&#125;&#125;</code>，但是不能写<code>&#123;&#123;a == 1?'yes'&#125;&#125;</code> 或者 <code>a==&#39;a&#39;?true</code> 请注意</p>
+</li>
+</ul>
+<h4 id="逻辑节点"><a href="#逻辑节点" class="headerlink" title="逻辑节点"></a>逻辑节点</h4><p>与普通节点相同，但是首字母要大写</p>
+<ul>
+<li>逻辑节点可以是双标签也可以是单标签，但标签必须显示闭合</li>
+<li>逻辑节点是一个独立的逻辑体，都有自己与许的属性，除此之外其他属性皆不允许</li>
+<li>可能含有必填属性</li>
+<li><strong>逻辑节点中所有属性中皆不可包含 DataPoint 的双花括号，但有些属性可能会共用 DataPoint 的解析规则（If 的 cond 属性）</strong></li>
+</ul>
+<h5 id="lt-If-gt-lt-If-gt-lt-Elif-gt-和-lt-Else-gt"><a href="#lt-If-gt-lt-If-gt-lt-Elif-gt-和-lt-Else-gt" class="headerlink" title="&lt;If&gt;&lt;/If&gt;, &lt;Elif/&gt; 和 &lt;Else/&gt;"></a><code>&lt;If&gt;&lt;/If&gt;, &lt;Elif/&gt; 和 &lt;Else/&gt;</code></h5><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 页面视图文件 url : src/viewTpls/pages/home-page.html --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">section</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">If</span> <span class="attr">cond</span>=<span class="string">&quot;!userName&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>No name<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Elif</span> <span class="attr">cond</span>=<span class="string">&quot;tooLong&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Name too long<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Else</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Hello, &#123;&#123;userName&#125;&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">If</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">section</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="lt-For-gt-lt-For-gt"><a href="#lt-For-gt-lt-For-gt" class="headerlink" title="&lt;For&gt;&lt;/For&gt;"></a><code>&lt;For&gt;&lt;/For&gt;</code></h5><ul>
+<li><p>通过 <code>list</code> 属性绑定循环列表 （必须指定此属性）。</p>
+</li>
+<li><p>通过 <code>item</code> 属性拿到每次循环的值 (必须指定此属性)。</p>
+</li>
+<li><p>通过 <code>index</code> 属性拿到每次循环的索引。</p>
+</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 页面视图文件 url : src/viewTpls/pages/home-page.html --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">section</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">For</span> <span class="attr">list</span>=<span class="string">&quot;someList&quot;</span> <span class="attr">item</span>=<span class="string">&quot;li&quot;</span> <span class="attr">index</span>=<span class="string">&quot;idx&quot;</span>&gt;</span></span><br><span class="line">      <span class="comment">&lt;!-- 基于list渲染 --&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">span</span>&gt;</span>&#123;&#123;idx&#125;&#125;:<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">span</span>&gt;</span>name - &#123;&#123;li.name&#125;&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">span</span>&gt;</span>- age - &#123;&#123;li.age&#125;&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">      <span class="comment">&lt;!-- 嵌套流程控制节点 --&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">If</span> <span class="attr">cond</span>=<span class="string">&quot;li.name==&#x27;Yao&#x27;&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">h1</span>&gt;</span>bingo~<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">Elif</span> <span class="attr">cond</span>=<span class="string">&quot;idx==0&quot;</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">h1</span>&gt;</span>bingo!<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">If</span>&gt;</span></span><br><span class="line">      <span class="comment">&lt;!-- 支持多层级 For循环 --&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">For</span> <span class="attr">list</span>=<span class="string">&quot;li.chlidren&quot;</span> <span class="attr">item</span>=<span class="string">&quot;li&quot;</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">li</span>&gt;</span>层级2: &#123;&#123;li&#125;&#125;<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">For</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">For</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">section</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="lt-Slot-gt-和-lt-Plugin-gt"><a href="#lt-Slot-gt-和-lt-Plugin-gt" class="headerlink" title="&lt;Slot/&gt; 和 &lt;Plugin/&gt;"></a><code>&lt;Slot/&gt; 和 &lt;Plugin/&gt;</code></h5><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- src/viewTpls/components/example-item.html --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">section</span> <span class="attr">id</span>=<span class="string">&quot;example-item&quot;</span>&gt;</span></span><br><span class="line">  left:</span><br><span class="line">  <span class="tag">&lt;<span class="name">slot</span> <span class="attr">name</span>=<span class="string">&quot;left&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">slot</span>&gt;</span></span><br><span class="line">  right:</span><br><span class="line">  <span class="tag">&lt;<span class="name">slot</span> <span class="attr">name</span>=<span class="string">&quot;right&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">slot</span>&gt;</span></span><br><span class="line">  默认值:</span><br><span class="line">  <span class="tag">&lt;<span class="name">slot</span> <span class="attr">name</span>=<span class="string">&quot;else&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>我是Slot的默认值<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">slot</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">section</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- src/viewTpls/pages/home-page.html --&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">section</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 基础使用 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">ExampleItem</span>&gt;</span>我是插槽,默认匹配第一个Slot节点<span class="tag">&lt;/<span class="name">ExampleItem</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">&lt;!-- 具名插槽 (利用 Plugin 的 slot字段 匹配 Slot 的name 字段)--&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">ExampleItem</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Plugin</span> <span class="attr">slot</span>=<span class="string">&quot;left&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">h1</span>&gt;</span>我是左插槽<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">Plugin</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Plugin</span> <span class="attr">slot</span>=<span class="string">&quot;right&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">h1</span>&gt;</span>我是右插槽<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">Plugin</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">ExampleItem</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">&lt;!-- 列表中使用 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">For</span> <span class="attr">list</span>=<span class="string">&quot;someList&quot;</span> <span class="attr">item</span>=<span class="string">&quot;li&quot;</span> <span class="attr">index</span>=<span class="string">&quot;idx&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">ExampleItem</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">Plugin</span> <span class="attr">slot</span>=<span class="string">&quot;left&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">h1</span>&gt;</span>&#123;&#123;li.left&#125;&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">Plugin</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">Plugin</span> <span class="attr">slot</span>=<span class="string">&quot;right&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">h1</span>&gt;</span>&#123;&#123;li.right&#125;&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">Plugin</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">ExampleItem</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">For</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">section</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="虚拟属性"><a href="#虚拟属性" class="headerlink" title="虚拟属性"></a>虚拟属性</h4><h5 id="双向绑定"><a href="#双向绑定" class="headerlink" title="双向绑定"></a>双向绑定</h5><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> @<span class="attr">value</span>=<span class="string">&quot;myValue&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="视图逻辑中使用"><a href="#视图逻辑中使用" class="headerlink" title="视图逻辑中使用"></a>视图逻辑中使用</h5><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">BookPage</span> <span class="keyword">extends</span> <span class="title">BookPageV</span>&lt;<span class="title">BookPage</span>&gt; </span>&#123;</span><br><span class="line">  <span class="keyword">public</span> onLoad(params: &#123; [key: <span class="built_in">string</span>]: <span class="built_in">string</span> &#125;): <span class="built_in">void</span> &#123;</span><br><span class="line">    <span class="comment">// 设置初始值</span></span><br><span class="line">    <span class="built_in">this</span>.myValue = <span class="string">&#x27;初始值&#x27;</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 监测值的改变</span></span><br><span class="line">  <span class="meta">@vWatch</span>(<span class="string">&#x27;value&#x27;</span>)</span><br><span class="line">  <span class="keyword">protected</span> <span class="function"><span class="title">handleValueChange</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">this</span>.myValue)</span><br><span class="line">    <span class="keyword">const</span> strValue = <span class="built_in">this</span>.myValue <span class="keyword">as</span> <span class="built_in">string</span></span><br><span class="line">    <span class="keyword">if</span> (strValue &amp;&amp; strValue.length &gt; <span class="number">5</span>) &#123;</span><br><span class="line">      <span class="comment">// 直接修改属性可以造成输入框中中值改变</span></span><br><span class="line">      <span class="built_in">this</span>.myValue = strValue.slice(<span class="number">0</span>, <span class="number">5</span>)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="事件绑定-bind-eventName-和-catch-eventName"><a href="#事件绑定-bind-eventName-和-catch-eventName" class="headerlink" title="事件绑定 @bind:[eventName] 和 @catch:[eventName]"></a>事件绑定 @bind:[eventName] 和 @catch:[eventName]</h5><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 无参数 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> @<span class="attr">bind:click</span>=<span class="string">&quot;handleBtnClick&quot;</span>&gt;</span>Btn<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 有参数 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> @<span class="attr">bind:click</span>=<span class="string">&quot;handleBtn2Click(&#123;isBtn2:true, name&#125;)&quot;</span>&gt;</span>Btn2<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@bind` 和 `@catch` 的区别是 `@catch` 会阻止事件冒泡。在小程序中会编译成内建的catch监听，web上会自动调用`stopPropagation</span><br><span class="line"></span><br><span class="line">eventName可以填写任意的合法事件，其中一些事件会进行隐式转换，提提升兼容性。 目前会转换的事件有:</span><br><span class="line">:click 事件在小程序中会被转换成 :tap</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h5 id="布尔属性-attr-name"><a href="#布尔属性-attr-name" class="headerlink" title="布尔属性 @attr:[name]"></a>布尔属性 @attr:[name]</h5><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 存在属性 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">disabled</span> /&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 不存在属性 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> /&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 逻辑判断--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;&quot;</span> @<span class="attr">attr:disabled</span>=<span class="string">&quot;!inputDisabled&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;&quot;</span> @<span class="attr">attr:disabled</span>=<span class="string">&quot;activeInput!=&#x27;myInput&#x27;&quot;</span> /&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 错误的形式 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">disabled</span>=<span class="string">&quot;false&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="元素引用-ref"><a href="#元素引用-ref" class="headerlink" title="元素引用 @ref"></a>元素引用 @ref</h5><p><strong>注意</strong>：在小程序中不可使用 <code>@ref</code></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 视图结构文件 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;some-element&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">button</span> @<span class="attr">ref</span>=<span class="string">&quot;btn&quot;</span>&gt;</span>按钮1<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">If</span> <span class="attr">cond</span>=<span class="string">&quot;someCond&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> @<span class="attr">ref</span>=<span class="string">&quot;p&quot;</span>&gt;</span>这个段落只有在someCond为true时才会存在<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">If</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 对应视图实现文件</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SomeComponent</span> <span class="keyword">extends</span> <span class="title">SomeComponentV</span>&lt;<span class="title">SomeComponent</span>&gt; </span>&#123;</span><br><span class="line">  <span class="keyword">protected</span> <span class="function"><span class="title">onMount</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="comment">// 例1:</span></span><br><span class="line">    <span class="comment">// this.refs.btn 可以获取 @ref=&quot;btn&quot; 对应元素，其类型为 HTMLButtonElement</span></span><br><span class="line">    <span class="comment">// 注意，由于生命周期和视图结构的影响，this.refs.btn 有可能未空</span></span><br><span class="line">    <span class="comment">// 在 Component 中至少要等到 onMount 调用后才会有值</span></span><br><span class="line">    <span class="keyword">const</span> btnElement = <span class="built_in">this</span>.refs.btn</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 例2-1:</span></span><br><span class="line">    <span class="comment">// 由于对 someCond 的改变并不会立即渲染</span></span><br><span class="line">    <span class="comment">// 所以下面的 pElement 会为空，要注意判断</span></span><br><span class="line">    <span class="built_in">this</span>.someCond = <span class="literal">true</span></span><br><span class="line">    <span class="keyword">const</span> pElement = <span class="built_in">this</span>.refs.p</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 例2-2:</span></span><br><span class="line">    <span class="comment">// 如果要避免例2-1中的问题，可以改成如下形式</span></span><br><span class="line">    <span class="built_in">this</span>.setState(&#123; <span class="attr">someCond</span>: <span class="literal">true</span> &#125;, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">const</span> pElement = <span class="built_in">this</span>.refs.p</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="抽象视图文件（v-file）"><a href="#抽象视图文件（v-file）" class="headerlink" title="抽象视图文件（v file）"></a>抽象视图文件（v file）</h3><h3 id="视图实现文件（view-file）"><a href="#视图实现文件（view-file）" class="headerlink" title="视图实现文件（view file）"></a>视图实现文件（view file）</h3><h4 id="组件实现文件"><a href="#组件实现文件" class="headerlink" title="组件实现文件"></a>组件实现文件</h4><blockquote>
+<p><strong>组件实现文件是一个组件逻辑部分的主干，所有组件相关的控制代码都在这里实现。组件实现文件会暴露一个主实现类，他继承自组件抽象文件(V 文件)的主类</strong></p>
+</blockquote>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- src/viewTpls/components/example-item.html --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">section</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">h1</span>&gt;</span>接受父组件的参数 =&gt; &#123;&#123;info&#125;&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">section</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- src/viewTpls/pages/home-page.html --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">section</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">ExampleItem</span> <span class="attr">data</span>=<span class="string">&quot;meow~~~&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">ExampleItem</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">section</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// src/ts/compoents/ExampleItem.ts</span></span><br><span class="line"><span class="keyword">import</span> &#123; ExampleItemV &#125; <span class="keyword">from</span> <span class="string">&#x27;../v/components/ExampleItem.v&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">ExampleItem</span> <span class="keyword">extends</span> <span class="title">ExampleItemV</span>&lt;<span class="title">ExampleItem</span>&gt; </span>&#123;</span><br><span class="line">  <span class="comment">/** 纯类型属性，定义了组件能够接收的属性，不需要赋值 */</span></span><br><span class="line">  <span class="keyword">public</span> propsType!: &#123;</span><br><span class="line">    <span class="attr">data</span>: <span class="built_in">string</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">public</span> eventsType!: &#123;&#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * 生命周期方法,可以拿到props参数,类型为this[&#x27;propsType&#x27;]</span></span><br><span class="line"><span class="comment">   * 将拿到的data 赋值给 数据绑定点 info</span></span><br><span class="line"><span class="comment">   * 详细的生命周期,会在后面逐一介绍.</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="keyword">public</span> onPropsChange(props: <span class="built_in">this</span>[<span class="string">&#x27;propsType&#x27;</span>]): <span class="built_in">void</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.info = props.data</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// src/ts/pages/HomePage.ts</span></span><br><span class="line"><span class="keyword">import</span> &#123; PageParams &#125; <span class="keyword">from</span> <span class="string">&#x27;winged&#x27;</span></span><br><span class="line"><span class="keyword">import</span> &#123; HomePageV &#125; <span class="keyword">from</span> <span class="string">&#x27;../v/pages/HomePage.v&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">HomePage</span> <span class="keyword">extends</span> <span class="title">HomePageV</span>&lt;<span class="title">HomePage</span>&gt; </span>&#123;</span><br><span class="line">  <span class="keyword">public</span> onLoad(params: PageParams): <span class="built_in">void</span> &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="eventsType"><a href="#eventsType" class="headerlink" title="eventsType"></a>eventsType</h5><p>用来定义组件产生的事件类型,常用于子向父传参</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 视图结构 --&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- src/viewTpls/components/example-item.html --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">section</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">button</span> @<span class="attr">bind:click</span>=<span class="string">&quot;handleClick&quot;</span>&gt;</span>与父组件通信<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">section</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- src/viewTpls/pages/home-page.html --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">section</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">ExampleItem</span> <span class="attr">:getInfo</span>=<span class="string">&quot;handleGetInfo&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">ExampleItem</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">h1</span>&gt;</span>&#123;&#123;info&#125;&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">section</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 视图实现</span></span><br><span class="line"><span class="comment">// src/ts/compoents/ExampleItem.ts</span></span><br><span class="line"><span class="keyword">import</span> &#123; ExampleItemV &#125; <span class="keyword">from</span> <span class="string">&#x27;../v/components/ExampleItem.v&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">ExampleItem</span> <span class="keyword">extends</span> <span class="title">ExampleItemV</span>&lt;<span class="title">ExampleItem</span>&gt; </span>&#123;</span><br><span class="line">  <span class="keyword">public</span> propsType!: &#123;&#125;</span><br><span class="line">  <span class="comment">/** 纯类型属性,定义了组件能够产生的事件,约束了emitEvent的参数类型,用来与父组件通信,不需要赋值 */</span></span><br><span class="line">  <span class="keyword">public</span> eventsType!: &#123;</span><br><span class="line">    <span class="comment">/** 格式为 事件名 getInfo , 参数类型 &#123;info :string&#125; */</span></span><br><span class="line">    <span class="attr">getInfo</span>: &#123;</span><br><span class="line">      <span class="attr">info</span>: <span class="built_in">string</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">public</span> onPropsChange(props: <span class="built_in">this</span>[<span class="string">&#x27;propsType&#x27;</span>]): <span class="built_in">void</span> &#123;&#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * 视图事件处理，对应结构文件中的 <span class="doctag">@bind</span>:click=&quot;handleClick&quot;</span></span><br><span class="line"><span class="comment">   * 函数体中 this.emitEvent 方法的参数 由 上面定义的 eventsType 约束</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="keyword">protected</span> <span class="function"><span class="title">handleClick</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.emitEvent(<span class="string">&#x27;getInfo&#x27;</span>, &#123; <span class="attr">info</span>: <span class="string">&#x27;向父亲传参&#x27;</span> &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// src/ts/pages/HomePage.ts</span></span><br><span class="line"><span class="keyword">import</span> &#123; PageParams &#125; <span class="keyword">from</span> <span class="string">&#x27;winged&#x27;</span></span><br><span class="line"><span class="keyword">import</span> &#123; HomePageV &#125; <span class="keyword">from</span> <span class="string">&#x27;../v/pages/HomePage.v&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">HomePage</span> <span class="keyword">extends</span> <span class="title">HomePageV</span>&lt;<span class="title">HomePage</span>&gt; </span>&#123;</span><br><span class="line">  <span class="keyword">public</span> onLoad(params: PageParams): <span class="built_in">void</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.info = <span class="string">&#x27;&#x27;</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * 响应子组件发射的事件</span></span><br><span class="line"><span class="comment">   * 接受的参数类型 eventData 通过this[&#x27;SE&#x27;][&#x27;函数名&#x27;]获取</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="keyword">public</span> <span class="function"><span class="title">handleGetInfo</span>(<span class="params">eventData: <span class="built_in">this</span>[<span class="string">&#x27;SE&#x27;</span>][<span class="string">&#x27;handleGetInfo&#x27;</span>]</span>)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.info = eventData.info</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="component-生命周期"><a href="#component-生命周期" class="headerlink" title="component 生命周期"></a>component 生命周期</h5><ul>
+<li><strong>onMount()：</strong>会在组件被创建时调用，在组件被销毁前只会触发一次。</li>
+<li><strong>onPropsChange()：</strong>会在组件的 props 变化时调用。在组件被销毁前可能会多次触发。</li>
+<li><strong>onBeforeDestory()：</strong>在组件销毁前调用。</li>
+</ul>
+<h4 id="页面实现文件"><a href="#页面实现文件" class="headerlink" title="页面实现文件"></a>页面实现文件</h4><blockquote>
+<p>是一个页面逻辑部分的主干，所有页面相关的控制代码都在这里实现。页面实现文件会暴露一个实现类，继承自页面抽象文件（V 文件）的主类。</p>
+</blockquote>
+<p><strong>步骤：</strong></p>
+<ul>
+<li><p>创建视图文件</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 页面视图文件 url : src/viewTpls/pages/home-page.html --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">section</span>&gt;</span>Hello,World<span class="tag">&lt;/<span class="name">section</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>编写视图实现文件，用来继承自内部自动生成的 V 文件主类</p>
+<p>创建完视图文件，并且编译好 V 文件后，在控制台输入一下命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">winged impl</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; PageParams &#125; <span class="keyword">from</span> <span class="string">&#x27;winged&#x27;</span></span><br><span class="line"><span class="keyword">import</span> &#123; HomePageV &#125; <span class="keyword">from</span> <span class="string">&#x27;../v/pages/HomePage.v&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">HomePage</span> <span class="keyword">extends</span> <span class="title">HomePageV</span>&lt;<span class="title">HomePage</span>&gt; </span>&#123;</span><br><span class="line">  <span class="keyword">public</span> onLoad(params: PageParams): <span class="built_in">void</span> &#123;</span><br><span class="line">    <span class="comment">// <span class="doctag">TODO:</span></span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h5 id="实现事件绑定"><a href="#实现事件绑定" class="headerlink" title="实现事件绑定"></a>实现事件绑定</h5><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 页面视图文件 url : src/viewTpls/pages/home-page.html --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">section</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">For</span> <span class="attr">list</span>=<span class="string">&quot;list&quot;</span> <span class="attr">item</span>=<span class="string">&quot;item&quot;</span> <span class="attr">index</span>=<span class="string">&quot;index&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> @<span class="attr">bind:click</span>=<span class="string">&quot;handleClick(&#123;index&#125;)&quot;</span>&gt;</span>&#123;&#123;item&#125;&#125;<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">For</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">section</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 视图实现文件</span></span><br><span class="line"><span class="keyword">import</span> &#123; PageParams &#125; <span class="keyword">from</span> <span class="string">&#x27;winged&#x27;</span></span><br><span class="line"><span class="keyword">import</span> &#123; HomePageV &#125; <span class="keyword">from</span> <span class="string">&#x27;../v/pages/HomePage.v&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">HomePage</span> <span class="keyword">extends</span> <span class="title">HomePageV</span>&lt;<span class="title">HomePage</span>&gt; </span>&#123;</span><br><span class="line">  <span class="comment">// tslint:disable-next-line: no-empty</span></span><br><span class="line">  <span class="keyword">public</span> onLoad(params: PageParams): <span class="built_in">void</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.list = [<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>]</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">protected</span> handleClick(event: MouseEvent, <span class="attr">eventData</span>: <span class="built_in">this</span>[<span class="string">&#x27;E&#x27;</span>][<span class="string">&#x27;handleClick&#x27;</span>]): <span class="built_in">void</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(eventData.index)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>第一个参数接受是事件对象 类型为 MouseEvent, 这是 TS 内部支持的.</li>
+<li>第二个参数接受的是 eventData ,也就是 <code>@bind:click=&quot;handleClick(&#123;index&#125;)&quot;</code> 传递的 list 遍历的 index ,他的类型 存储在 V 文件中 <code>public E!: &#123;handleClick: &#123; index: number &#125;&#125;</code> 所以需要 通过<code>this[&#39;E&#39;][&#39;handleClick&#39;]</code> 的方式来获取。</li>
+</ul>
+<h5 id="page-生命周期"><a href="#page-生命周期" class="headerlink" title="page 生命周期"></a>page 生命周期</h5><ul>
+<li>onLoad(params: PageParams)整个生命周期内只会触发一次</li>
+<li>onShow()整个生命周期内只会触发一次</li>
+<li>onReady()整个生命周期内只会触发一次</li>
+</ul>
+<p>执行顺序 : onLoad()=&gt; onShow() =&gt; onReady()</p>
+<h3 id="父子组件通信"><a href="#父子组件通信" class="headerlink" title="父子组件通信"></a>父子组件通信</h3><blockquote>
+<p>Winged 中，<strong>数据由父向子传递，事件由子向父传递</strong></p>
+</blockquote>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- User 页面 (src/viewTpls/pages/user-page.html) --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">section</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">For</span> <span class="attr">list</span>=<span class="string">&quot;users&quot;</span> <span class="attr">item</span>=<span class="string">&quot;user&quot;</span> <span class="attr">index</span>=<span class="string">&quot;index&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">UserInfo</span></span></span><br><span class="line"><span class="tag">      <span class="attr">user</span>=<span class="string">&quot;&#123;&#123;user&#125;&#125;&quot;</span></span></span><br><span class="line"><span class="tag">      <span class="attr">:click</span>=<span class="string">&quot;handleUserClick(&#123;user, index&#125;)&quot;</span></span></span><br><span class="line"><span class="tag">    &gt;</span><span class="tag">&lt;/<span class="name">UserInfo</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">For</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">section</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- UserInfo 组件 (src/viewTpls/components/user-info.html) --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;user&quot;</span> @<span class="attr">bind:click</span>=<span class="string">&quot;handleSelfClick&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;&#123;&#123;user.avatar&#125;&#125;&quot;</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">span</span>&gt;</span>&#123;&#123;user.nickname&#125;&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>User 页面中通过<a target="_blank" rel="noopener" href="https://www.yuque.com/n_tech/winged/logical-node#oix7ft">组件别名</a>引用了 UserInfo 组件，并写有 <code>user=&#123;&#123;user&#125;&#125;</code> 和 <code>:click=&quot;handleUserClick(&#123;user, index&#125;)&quot;</code> ，其中：</p>
+<ul>
+<li><code>user=&#123;&#123;user&#125;&#125;</code> 是一个 <strong>属性(property)传递</strong>。一个组件可以接收的属性需要被定义在视图实现类的 <code>propsType</code> 属性中</li>
+<li><code>:click=&quot;handleUserClick(&#123;user, index&#125;)&quot;</code> 是一个 <strong>事件(event)响应</strong>一个组件可以产生的事件种类需要被定义在视图实现类的 <code>eventsType</code> 属性中</li>
+</ul>
+<p><strong>注意：</strong>目前组件属性声明仅支持 TypeScript 类型语法（基础类型，简单的 interface 和 type），如果使用了泛型或者函数类型，编译将会报错</p>
+<h3 id="vWatch-和-vComputed-装饰器"><a href="#vWatch-和-vComputed-装饰器" class="headerlink" title="@vWatch 和@vComputed 装饰器"></a>@vWatch 和@vComputed 装饰器</h3><p><strong>注意：</strong>由于 ts 的限制，被@vWatch/@vComputed 监听的属性须是 public 属性</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 0.7.0 以前，可以写</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SomeView</span> <span class="keyword">extends</span> <span class="title">SomeViewV</span>&lt;<span class="title">SomeView</span>&gt; </span>&#123;</span><br><span class="line">  <span class="keyword">public</span> a: <span class="built_in">string</span></span><br><span class="line">  <span class="keyword">public</span> b: &#123; <span class="attr">c</span>: <span class="built_in">string</span> &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@vComputed</span>(<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b.c&#x27;</span>) <span class="keyword">public</span> <span class="keyword">get</span> <span class="title">someKey</span>() &#123;&#125;</span><br><span class="line">  <span class="meta">@vWatch</span>(<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b.c&#x27;</span>) <span class="keyword">public</span> <span class="function"><span class="title">handleKeyChange</span>(<span class="params"></span>)</span> &#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 0.7.0 以后，&#x27;b.c&#x27; 引用将必须使用 deep 版本，且非 deep 版本需要传入实现类泛型</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SomeView</span> <span class="keyword">extends</span> <span class="title">SomeViewV</span>&lt;<span class="title">SomeView</span>&gt; </span>&#123;</span><br><span class="line">  <span class="keyword">public</span> a: <span class="built_in">string</span></span><br><span class="line">  <span class="keyword">public</span> b: &#123; <span class="attr">c</span>: <span class="built_in">string</span> &#125;</span><br><span class="line">  d</span><br><span class="line">  <span class="meta">@vComputed</span>&lt;SomeView&gt;(<span class="string">&#x27;a&#x27;</span>) <span class="keyword">public</span> <span class="keyword">get</span> <span class="title">someKey1</span>() &#123;&#125;</span><br><span class="line">  <span class="meta">@vWatch</span>&lt;SomeView&gt;(<span class="string">&#x27;a&#x27;</span>) <span class="keyword">public</span> <span class="function"><span class="title">handleKeyChange1</span>(<span class="params"></span>)</span> &#123;&#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@vComputedDeep</span>(<span class="string">&#x27;b.c&#x27;</span>) <span class="keyword">public</span> <span class="keyword">get</span> <span class="title">someKey2</span>() &#123;&#125;</span><br><span class="line">  <span class="meta">@vWatchDeep</span>(<span class="string">&#x27;b.c&#x27;</span>) <span class="keyword">public</span> <span class="function"><span class="title">handleKeyChange2</span>(<span class="params"></span>)</span> &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="vWatch"><a href="#vWatch" class="headerlink" title="@vWatch"></a>@vWatch</h4><p>@vWatch 装饰器可以用于创建一个视图数据（state）监听器，在视图数据变化时此监听器将被调用</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; vWatched &#125; <span class="keyword">from</span> <span class="string">&#x27;winged&#x27;</span></span><br><span class="line"><span class="keyword">import</span> &#123; TestPageV &#125; <span class="keyword">from</span> <span class="string">&#x27;../v/pages/TestPage.v&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">TestPage</span> <span class="keyword">extends</span> <span class="title">TestPageV</span>&lt;<span class="title">TestPage</span>&gt; </span>&#123;</span><br><span class="line">  <span class="keyword">public</span> someValue = <span class="string">&#x27;a&#x27;</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">public</span> onLoad(): <span class="built_in">void</span> &#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="comment">// 当 this.someValue 改变时，handleSomeValueChange 会被调用</span></span><br><span class="line">      <span class="built_in">this</span>.someValue = <span class="string">&#x27;b&#x27;</span></span><br><span class="line">    &#125;, <span class="number">1000</span>)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@vWatch</span>(<span class="string">&#x27;someValue&#x27;</span>)</span><br><span class="line">  <span class="keyword">protected</span> <span class="function"><span class="title">handleSomeValueChange</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;some value 改变：&#x27;</span>, <span class="built_in">this</span>.someValue)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="vComputed"><a href="#vComputed" class="headerlink" title="@vComputed"></a>@vComputed</h4><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; utils, vComputed &#125; <span class="keyword">from</span> <span class="string">&#x27;winged&#x27;</span></span><br><span class="line"><span class="keyword">import</span> &#123; TestPageV &#125; <span class="keyword">from</span> <span class="string">&#x27;../v/pages/TestPage.v&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">TestPage</span> <span class="keyword">extends</span> <span class="title">TestPageV</span>&lt;<span class="title">TestPage</span>&gt; </span>&#123;</span><br><span class="line">  <span class="keyword">public</span> createdAt: <span class="built_in">number</span> = <span class="number">0</span></span><br><span class="line">  <span class="keyword">public</span> dateFormat = <span class="string">&#x27;Y/M/D&#x27;</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 这个属性会在 createdAt 或 dateFormat 变化时自动重计算</span></span><br><span class="line">  <span class="comment">// 视图中可以直接使用这个属性</span></span><br><span class="line">  <span class="meta">@vComputed</span>(<span class="string">&#x27;createdAt&#x27;</span>, <span class="string">&#x27;dateFormat&#x27;</span>)</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">get</span> <span class="title">displayDate</span>() &#123;</span><br><span class="line">    <span class="keyword">return</span> utils.parseTime(<span class="built_in">this</span>.createdAt, <span class="built_in">this</span>.dateFormat)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">public</span> userList: <span class="built_in">Array</span>&lt;&#123; <span class="attr">name</span>: <span class="built_in">string</span> &#125;&gt; = []</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 这个属性会在 userList 中的成员产生变化时被重新计算</span></span><br><span class="line">  <span class="comment">// 视图中可以直接使用这个属性</span></span><br><span class="line">  <span class="comment">// <span class="doctag">NOTE:</span> 注意，如果 userList 可能为空，记得做空处理，否则执行会报错</span></span><br><span class="line">  <span class="meta">@vComputed</span>(<span class="string">&#x27;userList&#x27;</span>)</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">get</span> <span class="title">userCount</span>() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>.userList.length</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 这个属性会在 userList 中的成员产生变化时被重新计算</span></span><br><span class="line">  <span class="comment">// 视图中可以直接使用这个属性</span></span><br><span class="line">  <span class="comment">// <span class="doctag">NOTE:</span> 注意，如果 userList 可能为空，记得做空处理，否则执行会报错</span></span><br><span class="line">  <span class="meta">@vComputed</span>(<span class="string">&#x27;userList&#x27;</span>)</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">get</span> <span class="title">isEmpty</span>() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>.userList.length === <span class="number">0</span> ? <span class="literal">true</span> : <span class="literal">false</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">public</span> onLoad(): <span class="built_in">void</span> &#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="comment">// 通过修改原始属性来触发计算属性更新</span></span><br><span class="line">      <span class="built_in">this</span>.createdAt = <span class="built_in">Date</span>.now()</span><br><span class="line">      <span class="built_in">this</span>.userList.push(&#123; <span class="attr">name</span>: <span class="string">&#x27;Alice&#x27;</span> &#125;)</span><br><span class="line">    &#125;, <span class="number">1000</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="陷阱和-Tips"><a href="#陷阱和-Tips" class="headerlink" title="陷阱和 Tips"></a>陷阱和 Tips</h3><ul>
+<li><p>不要忽略 cli 中的错误提示和警告</p>
+</li>
+<li><p>不要在 view 中使用非纯数据对象</p>
+</li>
+<li><p>如果要使用 for…in 循环，一定要进行<code>hasOwnProperty</code>检查（推荐使用<code>for..of</code> + <code>Object.keys</code>）</p>
+</li>
+<li><p>使用正确的方式来操作数组数据，遵循以下规则</p>
+<ul>
+<li>增建数组成员务必使用 Array API</li>
+<li>保证每个数组成员时纯数据，且实现同一个 interface</li>
+<li>不要直接对着之前没有的值下标赋值</li>
+<li>不要在任何时候给数字成员赋值 null</li>
+<li>不要修改数组的 length 属性</li>
+</ul>
+</li>
+<li><p>合理的设计组件的 propsType，不支持类型有</p>
+<ul>
+<li>Class 类型</li>
+<li>Function 或者函数字面量</li>
+</ul>
+</li>
+<li><p>HTML 里不能使用<code>===</code></p>
+</li>
+</ul>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/weixin.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -194,241 +420,106 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2021/09/16/winged/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/07/26/interview/" class="archive-article-date">
-  	<time datetime="2021-07-26T12:17:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-26</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2021/07/26/interview/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">面试总结</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/07/26/interview/">面试总结</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">html</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">css</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">js</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">react</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">webpack</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/06/14/projectShare/" class="archive-article-date">
-  	<time datetime="2021-06-14T14:37:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-06-14</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/06/14/projectShare/">React+Dva+Umi+Antd项目日常开发问题清单</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">react</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">typeScript</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">GGEditor</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/05/09/vue&react-comparison/" class="archive-article-date">
-  	<time datetime="2021-05-09T02:55:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-09</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/05/09/vue&react-comparison/">vue与react项目开发对比</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">react</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/04/12/vue3-learning-experience/" class="archive-article-date">
-  	<time datetime="2021-04-12T13:00:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-12</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/04/12/vue3-learning-experience/">vue3 学习及使用心得</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">vue3</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/03/16/about-me/" class="archive-article-date">
-  	<time datetime="2021-03-16T08:04:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-16</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/03/16/about-me/">About me</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">about me</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -451,8 +542,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
