@@ -6,17 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Archives | Lin的博客</title>
+  <title>vue源码分析心得 | Lin的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="不积跬步无以至千里">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Lin的博客">
-<meta property="og:url" content="http://example.com/archives/index.html">
+  <meta name="description" content="观察者模式类似于node的的Event模块，使用一个容器对象来存储注册的事件，提供on方法注册事件，off方法移除事件，emit方法发射事件。如下：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vue源码分析心得">
+<meta property="og:url" content="http://example.com/2021/12/08/vueSource/index.html">
 <meta property="og:site_name" content="Lin的博客">
-<meta property="og:description" content="不积跬步无以至千里">
+<meta property="og:description" content="观察者模式类似于node的的Event模块，使用一个容器对象来存储注册的事件，提供on方法注册事件，off方法移除事件，emit方法发射事件。如下：">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-12-08T14:39:00.000Z">
+<meta property="article:modified_time" content="2021-12-08T14:41:21.629Z">
 <meta property="article:author" content="Web_lin">
-<meta property="article:tag" content="前端,js,jquery,javascript,html5,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder,Geek,html,css,css3,用户体验">
+<meta property="article:tag" content="vue">
+<meta property="article:tag" content="javaScript">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Lin的博客" type="application/atom+xml">
@@ -149,36 +152,123 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-vueSource" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2021" class="archive-year">2021</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/12/08/vueSource/" class="archive-article-date">
-  	<time datetime="2021-12-08T14:39:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-08</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/12/08/vueSource/">vue源码分析心得</a>
+    <h1 class="article-title" itemprop="name">
+      vue源码分析心得
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2021/12/08/vueSource/" class="archive-article-date">
+  	<time datetime="2021-12-08T14:39:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-08</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="观察者模式"><a href="#观察者模式" class="headerlink" title="观察者模式"></a>观察者模式</h3><p>类似于node的的Event模块，使用一个容器对象来存储注册的事件，提供on方法注册事件，off方法移除事件，emit方法发射事件。如下：</p>
+<span id="more"></span>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Event</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="title">constructor</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.eventInfo = &#123;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">  	<span class="comment">/** 注册事件, 可以连续注册, 可以注册多个事件 */</span></span><br><span class="line">    <span class="function"><span class="title">on</span>(<span class="params">type, handle</span>)</span>&#123;</span><br><span class="line">        (<span class="built_in">this</span>.eventInfo[type] || (<span class="built_in">this</span>.eventInfo[type] = [])).push(handle);</span><br><span class="line">    &#125;</span><br><span class="line">  	<span class="comment">/** 移除事件, </span></span><br><span class="line"><span class="comment">    	* - 如果没有参数, 移除所有事件, </span></span><br><span class="line"><span class="comment">      * - 如果只带有 事件名 参数, 就移除这个事件名下的所有事件,</span></span><br><span class="line"><span class="comment">      * - 如果带有 两个 参数, 那么就是表示移除某一个事件的具体处理函数</span></span><br><span class="line"><span class="comment">    * */</span></span><br><span class="line">    <span class="function"><span class="title">off</span>(<span class="params">type, handle</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!<span class="built_in">arguments</span>.length) &#123;</span><br><span class="line">            <span class="built_in">this</span>.eventInfo = &#123;&#125;</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span> (<span class="built_in">arguments</span>.length === <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="built_in">this</span>.eventInfo[type] = []</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span> (<span class="built_in">arguments</span>.length === <span class="number">2</span>) &#123;</span><br><span class="line">            <span class="keyword">const</span> len = <span class="built_in">this</span>.eventInfo[type].length;</span><br><span class="line">          	<span class="comment">// 倒着循环 数组的 序号不会受到影响</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">let</span> i = len - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">                <span class="keyword">if</span> (<span class="built_in">this</span>.eventInfo[type][i] === handle) &#123;<span class="comment">// 函数比较为引用类型比较的是引用地址</span></span><br><span class="line">                    <span class="built_in">this</span>.eventInfo[type].splice(i, <span class="number">1</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">   <span class="comment">/** </span></span><br><span class="line"><span class="comment">   		* 发射事件, 触发事件, 包装参数 传递给事件处理函数</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">    <span class="function"><span class="title">emit</span>(<span class="params">type</span>)</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> len = <span class="built_in">this</span>.eventInfo[type].length;</span><br><span class="line">        <span class="keyword">let</span> args = <span class="built_in">Array</span>.prototype.slice.call( <span class="built_in">arguments</span>, <span class="number">1</span> )</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; len; i++) &#123;</span><br><span class="line">           <span class="built_in">this</span>.eventInfo[type][i].apply( <span class="literal">null</span>, args );</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> event = <span class="keyword">new</span> Event()</span><br></pre></td></tr></table></figure>
+
+<h3 id="插值语法解析实现"><a href="#插值语法解析实现" class="headerlink" title="插值语法解析实现"></a>插值语法解析实现</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getValueByPath</span>(<span class="params">obj, path</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> paths = path.split(<span class="string">&#x27;.&#x27;</span>); <span class="comment">// [xxx, yyy, zzz];</span></span><br><span class="line">  <span class="keyword">let</span> res = obj;</span><br><span class="line">  <span class="keyword">let</span> prop;</span><br><span class="line">  <span class="keyword">while</span> (prop = paths.shift()) &#123;</span><br><span class="line">    res = res[prop];</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//解析：&#123;&#123; data.userInfo.userName &#125;&#125;</span></span><br><span class="line"><span class="keyword">const</span> data = &#123; <span class="attr">userInfo</span>: &#123;<span class="attr">userName</span>: <span class="string">&#x27;zhangsan&#x27;</span> &#125;&#125; <span class="comment">// 类似于vue里定义到data里的数据</span></span><br><span class="line"><span class="keyword">const</span> reg = <span class="regexp">/\&#123;\&#123;(.+?)\&#125;\&#125;/g</span></span><br><span class="line"><span class="keyword">const</span> str = <span class="string">&#x27;&#123;&#123; userInfo.userName &#125;&#125;&#x27;</span>; <span class="comment">// 类似于vue模板里的用法</span></span><br><span class="line"><span class="keyword">const</span> value = str.replace(reg, <span class="function">(<span class="params">_, g</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// _: &#123;&#123; data.userInfo.userName &#125;&#125;, g:  data.userInfo.userName</span></span><br><span class="line">  <span class="keyword">return</span> getValueByPath(data, g.trim());</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="属性代理"><a href="#属性代理" class="headerlink" title="属性代理"></a>属性代理</h3><p>在vue里<code>const app = new Vue(options)</code>通过optinos传递的data属性，在vue底层initData的时候将options上的很多属性都绑定到了vue实例上，因此我们可以通过app.xxx访问到options.data.xxx上的对应的属性值，修改app.xxx =xxx 同样会同步修改到data.xxx。</p>
+<p>实现原理大致如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> options = &#123;</span><br><span class="line">  <span class="attr">data</span>: &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;zhangsan&#x27;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/** 将某一个对象的属性 访问 映射到 对象的某一个属性成员上 */</span></span><br><span class="line"><span class="keyword">const</span> proxy = <span class="function">(<span class="params">target, prop, key</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">Object</span>.defineProperty(target, key, &#123;</span><br><span class="line">    <span class="attr">enumerable</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">configurable</span>: <span class="literal">true</span>,</span><br><span class="line">    get () &#123;</span><br><span class="line">      <span class="keyword">return</span> target[prop][key];</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="function"><span class="title">set</span>(<span class="params">newVal</span>)</span> &#123;</span><br><span class="line">      target[prop][key] = newVal;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Vue</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params">options</span>)</span> &#123;</span><br><span class="line">   	<span class="built_in">this</span>._data = options.data;</span><br><span class="line">    <span class="built_in">this</span>.initData();</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="title">initData</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">const</span> keys = <span class="built_in">Object</span>.keys(<span class="built_in">this</span>._data);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i&lt;keys.length; i++) &#123;</span><br><span class="line">      proxy(<span class="built_in">this</span>, <span class="string">&#x27;_data&#x27;</span>, keys[i])</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> app = <span class="keyword">new</span> Vue(options)</span><br></pre></td></tr></table></figure>
+
+<h3 id="数据响应式处理"><a href="#数据响应式处理" class="headerlink" title="数据响应式处理"></a>数据响应式处理</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"> <span class="comment">// 针对数组类型方法响应式处理</span></span><br><span class="line"><span class="keyword">let</span> ARRAY_METHOD = [</span><br><span class="line">  <span class="string">&#x27;push&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;pop&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;shift&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;unshift&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;reverse&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;sort&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;splice&#x27;</span>,</span><br><span class="line">];</span><br><span class="line"><span class="keyword">let</span> array_methods = <span class="built_in">Object</span>.create( <span class="built_in">Array</span>.prototype );</span><br><span class="line">ARRAY_METHOD.forEach( <span class="function"><span class="params">method</span> =&gt;</span> &#123;</span><br><span class="line">  array_methods[ method ] = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 调用原来的方法</span></span><br><span class="line">    <span class="built_in">console</span>.log( <span class="string">&#x27;调用的是拦截的 &#x27;</span> + method + <span class="string">&#x27; 方法&#x27;</span> );</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 将数据进行响应式化</span></span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="built_in">arguments</span>.length; i++ ) &#123;</span><br><span class="line">      observe( <span class="built_in">arguments</span>[ i ] );</span><br><span class="line">    &#125; </span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> res = <span class="built_in">Array</span>.prototype[ method ].apply( <span class="built_in">this</span>, <span class="built_in">arguments</span> );</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">  &#125;</span><br><span class="line">&#125; );</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> defineReactive = <span class="function">(<span class="params"> target, key, value, enumerable </span>) =&gt;</span> &#123;</span><br><span class="line"> <span class="comment">// 函数内部就是一个局部作用域, 这个 value 就只在函数内使用的变量 ( 闭包 )</span></span><br><span class="line">  <span class="keyword">if</span> ( <span class="keyword">typeof</span> value === <span class="string">&#x27;object&#x27;</span> &amp;&amp; value != <span class="literal">null</span> ) &#123;</span><br><span class="line">    <span class="comment">// 是非数组的引用类型</span></span><br><span class="line">    observe(value); <span class="comment">// 递归</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">Object</span>.defineProperty(target, key, &#123;</span><br><span class="line">    <span class="attr">configurable</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">enumerable</span>: !!enumerable,</span><br><span class="line">    <span class="function"><span class="title">get</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> value;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="function"><span class="title">set</span>(<span class="params">newVal</span>)</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> ( value === newVal ) <span class="keyword">return</span>;</span><br><span class="line">      <span class="comment">// 目的</span></span><br><span class="line">      <span class="comment">// 将重新赋值的数据变成响应式的, 因此如果传入的是对象类型, 那么就需要使用 observe 将其转换为响应式</span></span><br><span class="line">      <span class="keyword">if</span> (<span class="keyword">typeof</span> newVal === <span class="string">&#x27;object&#x27;</span> &amp;&amp; newVal != <span class="literal">null</span>) &#123;</span><br><span class="line">        observe(newVal);</span><br><span class="line">      &#125; </span><br><span class="line">      value = newVal;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 对象或者数组类型需要递归处理对应的属性成响应式</span></span><br><span class="line"><span class="keyword">const</span> observe = <span class="function">(<span class="params"> obj </span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// 之前没有对 obj 本身进行操作, 这一次就直接对 obj 进行判断</span></span><br><span class="line">  <span class="keyword">if</span> ( <span class="built_in">Array</span>.isArray( obj ) ) &#123;</span><br><span class="line">    <span class="comment">// 对其每一个元素处理</span></span><br><span class="line">    obj.__proto__ = array_methods;</span><br><span class="line">    <span class="keyword">for</span> ( <span class="keyword">let</span> i = <span class="number">0</span>; i &lt; obj.length; i++ ) &#123;</span><br><span class="line">      observe( obj[ i ] ); <span class="comment">// 递归处理每一个数组元素 </span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">// 对其成员进行处理</span></span><br><span class="line">    <span class="keyword">let</span> keys = <span class="built_in">Object</span>.keys( obj );</span><br><span class="line">    <span class="keyword">for</span> ( <span class="keyword">let</span> i = <span class="number">0</span>; i &lt; keys.length; i++ ) &#123;</span><br><span class="line">      <span class="keyword">let</span> prop = keys[ i ]; <span class="comment">// 属性名</span></span><br><span class="line">      defineReactive( obj, prop, obj[ prop ], <span class="literal">true</span> );</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：</strong>针对数组类型的响应式操作任然存在缺陷，如直接对array.length进行操作</p>
+<p>然后在上面<code>属性代理</code>那里定义的initData方法里调用<code>observe(this._data)</code>实现对_data数据的响应式处理</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">initData</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  	observe(<span class="built_in">this</span>._data);<span class="comment">// 响应式化</span></span><br><span class="line">  </span><br><span class="line">    <span class="keyword">const</span> keys = <span class="built_in">Object</span>.keys(<span class="built_in">this</span>._data);</span><br><span class="line">   <span class="comment">//属性代理</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i&lt;keys.length; i++) &#123;</span><br><span class="line">      <span class="comment">// 将 this._data[ keys[ i ] ] 映射到 this[ keys[ i ] ] 上</span></span><br><span class="line">      <span class="comment">// 就是要 让 this 提供 keys[ i ] 这个属性</span></span><br><span class="line">      <span class="comment">// 在访问这个属性的时候 相当于在 访文this._data 的这个属性</span></span><br><span class="line">      proxy(<span class="built_in">this</span>, <span class="string">&#x27;_data&#x27;</span>, keys[i])<span class="comment">// 这里封装成proxy是在vue中不单单只处理了_data，像computed,watch等等也是做了同样的的处理</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="发布订阅模式"><a href="#发布订阅模式" class="headerlink" title="发布订阅模式"></a>发布订阅模式</h3><p>形式： 不局限于函数，形式可以是对象等</p>
+<ul>
+<li><p>中间的<strong>全局的容器 <strong>，用来</strong>存储</strong>可以被触发的东西（函数，对象）；</p>
+</li>
+<li><p>需要一个方法，可以往容器中<strong>传入</strong>东西（函数，对象）</p>
+</li>
+<li><p>需要一个方法，可以将容器中的东西取出来<strong>使用</strong>（函数调用，对象的方法调用）</p>
+</li>
+</ul>
+<p>在vue页面中变更（diff）是以组件为单位，如果页面中只有一个组件（Vue实例），不会有性能损失，但如果有多个组件（多个watcher的一种情况），第一次会有多个组件watcher存入到全局watcher中。假如修改了局部数据（某个组件的数据），表示只会对该组件进行diff算法，也就是说只会重新生成该组件的抽象语法树，只会访问该组件的watcher表示再次往全局存储的只有改组件的watcher，页面更新的时候也就只需要更新一部分</p>
+<blockquote>
+<p><strong>虚拟dom：</strong>就对应就是一个页面组成的最小单位 <strong>组件</strong></p>
+<p><strong>data:</strong> 对应与我们在组件里定义的数据</p>
+<p><strong>watcher：</strong> 与组件存在一一对应的关系，它主要是监听到组件数据修改就会派发更新，内存中会全局存储watcher（可以有多个watcher，并且至少会有一个watcher）</p>
+</blockquote>
+<h4 id="什么时候会将组件对应的wather存入全局watcher"><a href="#什么时候会将组件对应的wather存入全局watcher" class="headerlink" title="什么时候会将组件对应的wather存入全局watcher"></a>什么时候会将组件对应的wather存入全局watcher</h4><blockquote>
+<p>在模板渲染与虚拟Dom生成的时候会读取数据，此时会调用depend方法，将对应的watcher存入全局watcher中。</p>
+</blockquote>
+<h4 id="什么时候调用watcher做派发更新"><a href="#什么时候调用watcher做派发更新" class="headerlink" title="什么时候调用watcher做派发更新"></a>什么时候调用watcher做派发更新</h4><blockquote>
+<p>当修改数据的时候，也就是设置组件里定义的data属性的时候，会调用notify方法，将全局的所有watcher一一触发</p>
+</blockquote>
+<p>下面让我们来看看代码层面的实现：</p>
+<p>watcher观察者，用于发射更新行为，会提供以下方法：</p>
+<ul>
+<li><p><code>get()</code>用来进行<strong>计算</strong>或者<strong>执行</strong>处理函数</p>
+</li>
+<li><p><code>update()</code>公共的外部方法，该方法会触发内部的run方法</p>
+</li>
+<li><p><code>run()</code>运行，用来判断内部是使用异步还是同步运行等，这个方法最终会调用内部的get方法</p>
+</li>
+<li><p><code>cleanupDep()</code> 简单理解为清除队列</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> watcherid = <span class="number">0</span>;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Watcher</span> </span>&#123;</span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * </span></span><br><span class="line"><span class="comment">   * <span class="doctag">@param <span class="type">&#123;Object&#125;</span> </span>vm JGVue 实例</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@param <span class="type">&#123;String|Function&#125;</span> </span>expOrfn 如果是渲染 watcher, 传入的就是渲染函数, 如果是 计算 watcher 传入的就是路径表达式, 暂			时只考虑 expOrFn 为函数的情况.</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="function"><span class="title">consructor</span>(<span class="params">vm, expOrFn</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">this</span>.vm = vm;</span><br><span class="line">    <span class="built_in">this</span>.getter = expOrFn;</span><br><span class="line">    <span class="built_in">this</span>.id = watcherid ++;</span><br><span class="line">    <span class="built_in">this</span>.deps = []; <span class="comment">// 依赖项</span></span><br><span class="line">    <span class="built_in">this</span>.get();</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 计算触发getter</span></span><br><span class="line">  <span class="function"><span class="title">get</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    pushTarget(<span class="built_in">this</span>);</span><br><span class="line">    <span class="built_in">this</span>.getter.cal(<span class="built_in">this</span>.vm, <span class="built_in">this</span>.vm);</span><br><span class="line">    popTarget();</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * 执行, 并判断是懒加载, 还是同步执行, 还是异步执行: </span></span><br><span class="line"><span class="comment">   * 我们现在只考虑 异步执行 ( 简化的是 同步执行 )</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="function"><span class="title">run</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">this</span>.get();</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 对外公开的方法，用于在属性发生变化的时候触发的接口</span></span><br><span class="line">  <span class="function"><span class="title">update</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">this</span>.run()</span><br><span class="line">  &#125;</span><br><span class="line">   <span class="comment">/** 清空依赖队列 */</span></span><br><span class="line">  <span class="function"><span class="title">cleanupDep</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="title">addDep</span>(<span class="params">dep</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">this</span>.deps.push(dep)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Dep对象，该对象提供依赖收集（depend）的功能，和派发更新（notify）的功能，在notify中去调用watcher的update方法</p>
+<h4 id="watcher与Dep的关系"><a href="#watcher与Dep的关系" class="headerlink" title="watcher与Dep的关系"></a>watcher与Dep的关系</h4><p>所谓依赖收集 <strong>实际上就是告诉当前的watcher什么属性被访问了</strong>，那么在这个watcher计算的时候或者渲染的时候就会将这些收集到的属性进行更新</p>
+<h4 id="如何将属性与当前的watcher关联起来"><a href="#如何将属性与当前的watcher关联起来" class="headerlink" title="如何将属性与当前的watcher关联起来"></a>如何将属性与当前的watcher关联起来</h4><blockquote>
+<p>在全局准备一个targetStack（watcher栈， 简单的理解为 watcher ”数组“，把一个操作中需要使用的watcher都存储起来），在watcher调用get方法的时候，将当前watcher放到全局，在ge t之前结束的时候（之后），将这个全局的watcher移除，提供：push Target、popTarget。在每个属性中都有一个Dep对象</p>
+</blockquote>
+<p>在访问对象属性的时候（ge t），我们的渲染watcher就在全局中将属性与watcher关联，其实就是将当前渲染的watcher存储到属性相关的dep中。同事讲de p也存储到全局的watcher中（互相引用的关系）</p>
+<ul>
+<li>属性引用了当前的渲染 watcher, <strong>属性知道谁渲染它</strong></li>
+<li>当前渲染 watcher 引用了 访问的属性 ( Dep ), <strong>当前的 Watcher 知道渲染了什么属性</strong></li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> depid = <span class="number">0</span>;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Dep</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">this</span>.id = depid++;</span><br><span class="line">    <span class="built_in">this</span>.subs = []; <span class="comment">// 存储的是与当前Dep关联的watcher</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="title">addSub</span>(<span class="params">sub</span>)</span>&#123;<span class="comment">// 添加一个watcher</span></span><br><span class="line">    <span class="built_in">this</span>.subs.push(sub);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="title">removeSub</span>(<span class="params">sub</span>)</span>&#123;<span class="comment">// 移除指定watcher</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="built_in">this</span>.subs.length - <span class="number">1</span>; i&gt;= <span class="number">0</span>; i--)&#123;</span><br><span class="line">      <span class="keyword">if</span>(sub===<span class="built_in">this</span>.subs[i])&#123;</span><br><span class="line">        <span class="built_in">this</span>.subs.splice(i, <span class="number">1</span>);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 将当前Dep与当前watcher关联</span></span><br><span class="line">  <span class="function"><span class="title">depend</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="comment">// 就是将当前的dep与当前的watcher关联</span></span><br><span class="line">    <span class="keyword">if</span>(Dep.target)&#123;</span><br><span class="line">      <span class="built_in">this</span>.addSub(Dep.target);<span class="comment">//将当前的watcher关联到的当前dep上</span></span><br><span class="line">      Dep.target.addDep(<span class="built_in">this</span>);<span class="comment">// 将当前的dep与当前渲染watcher关联上</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">//触发与之关联的watcher的update方法，起到更新的作用</span></span><br><span class="line">  <span class="function"><span class="title">notify</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="comment">// 此时, deps 中已经关联到 我们需要使用的 那个 watcher 了</span></span><br><span class="line">    <span class="keyword">let</span> deps = <span class="built_in">this</span>.subs.slice();</span><br><span class="line">    deps.forEach(<span class="function"><span class="params">watcher</span> =&gt;</span> &#123;</span><br><span class="line">      watcher.update();</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 全局的容器存储渲染 Watcher</span></span><br><span class="line">Dep.target = <span class="literal">null</span>;</span><br><span class="line"><span class="keyword">let</span> targetStack = [];</span><br><span class="line"></span><br><span class="line"><span class="comment">/** 将当前操作的 watcher 存储到 全局 watcher 中, 参数 target 就是当前 watcher */</span></span><br><span class="line"><span class="keyword">const</span> <span class="function"><span class="title">pushTarget</span>(<span class="params">target</span>)</span>&#123;</span><br><span class="line">  targetStack.unshift(Dep.target);</span><br><span class="line">  Dep.target = target;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/** 将 当前 watcher 踢出 */</span></span><br><span class="line"><span class="keyword">const</span> <span class="function"><span class="title">popTarget</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">  Dep.target = targetStack.shift();<span class="comment">// 踢到最后就是 undefined</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/weixin.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -194,321 +284,106 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2021/12/08/vueSource/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/10/09/typeScript/" class="archive-article-date">
-  	<time datetime="2021-10-09T02:55:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-09</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2021/10/09/typeScript/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">TypeScript 基本语法</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/10/09/typeScript/">TypeScript 基本语法</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">typeScript</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/09/16/winged/" class="archive-article-date">
-  	<time datetime="2021-09-16T08:11:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-09-16</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/09/16/winged/">winged 框架学习</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">winged</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">winged-cli</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/07/26/interview/" class="archive-article-date">
-  	<time datetime="2021-07-26T12:17:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-26</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/07/26/interview/">面试总结</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">html</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">css</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">js</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">react</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">webpack</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/06/14/projectShare/" class="archive-article-date">
-  	<time datetime="2021-06-14T14:37:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-06-14</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/06/14/projectShare/">React+Dva+Umi+Antd项目日常开发问题清单</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">react</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">typeScript</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">GGEditor</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/05/09/vue&react-comparison/" class="archive-article-date">
-  	<time datetime="2021-05-09T02:55:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-09</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/05/09/vue&react-comparison/">vue与react项目开发对比</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">react</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/04/12/vue3-learning-experience/" class="archive-article-date">
-  	<time datetime="2021-04-12T13:00:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-12</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/04/12/vue3-learning-experience/">vue3 学习及使用心得</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">vue3</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/03/16/about-me/" class="archive-article-date">
-  	<time datetime="2021-03-16T08:04:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-16</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/03/16/about-me/">About me</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">about me</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -531,8 +406,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
