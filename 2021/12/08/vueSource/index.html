@@ -10,15 +10,15 @@
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="观察者模式类似于node的的Event模块，使用一个容器对象来存储注册的事件，提供on方法注册事件，off方法移除事件，emit方法发射事件。如下：">
+  <meta name="description" content="前言 前面一直想要探索一下vue源码的奥秘，刚好最近工作任务不是很重没有加班，就利用工作之余的时间研究一下vue源码，下面是自己在此过程中对部分知识点的梳理，不是很全面也还在学习中，会不断完善更新。  观察者模式类似于node的的Event模块，使用一个容器对象来存储注册的事件，提供on方法注册事件，off方法移除事件，emit方法发射事件。如下：">
 <meta property="og:type" content="article">
 <meta property="og:title" content="vue源码分析心得">
 <meta property="og:url" content="http://example.com/2021/12/08/vueSource/index.html">
 <meta property="og:site_name" content="Lin的博客">
-<meta property="og:description" content="观察者模式类似于node的的Event模块，使用一个容器对象来存储注册的事件，提供on方法注册事件，off方法移除事件，emit方法发射事件。如下：">
+<meta property="og:description" content="前言 前面一直想要探索一下vue源码的奥秘，刚好最近工作任务不是很重没有加班，就利用工作之余的时间研究一下vue源码，下面是自己在此过程中对部分知识点的梳理，不是很全面也还在学习中，会不断完善更新。  观察者模式类似于node的的Event模块，使用一个容器对象来存储注册的事件，提供on方法注册事件，off方法移除事件，emit方法发射事件。如下：">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-12-08T14:39:00.000Z">
-<meta property="article:modified_time" content="2021-12-12T12:24:51.694Z">
+<meta property="article:modified_time" content="2022-02-14T00:57:50.978Z">
 <meta property="article:author" content="web_lin">
 <meta property="article:tag" content="javaScript">
 <meta property="article:tag" content="vue">
@@ -233,7 +233,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">2.6k字</span>
+      <span class="post-count">2.7k字</span>
     </span>
   </span>
 
@@ -253,7 +253,10 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h3 id="观察者模式"><a href="#观察者模式" class="headerlink" title="观察者模式"></a>观察者模式</h3><p>类似于node的的Event模块，使用一个容器对象来存储注册的事件，提供on方法注册事件，off方法移除事件，emit方法发射事件。如下：</p>
+    <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
+<p>前面一直想要探索一下vue源码的奥秘，刚好最近工作任务不是很重没有加班，就利用工作之余的时间研究一下vue源码，下面是自己在此过程中对部分知识点的梳理，不是很全面也还在学习中，会不断完善更新。</p>
+</blockquote>
+<h3 id="观察者模式"><a href="#观察者模式" class="headerlink" title="观察者模式"></a>观察者模式</h3><p>类似于node的的Event模块，使用一个容器对象来存储注册的事件，提供on方法注册事件，off方法移除事件，emit方法发射事件。如下：</p>
 <span id="more"></span>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Event</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="title">constructor</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.eventInfo = &#123;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">  	<span class="comment">/** 注册事件, 可以连续注册, 可以注册多个事件 */</span></span><br><span class="line">    <span class="function"><span class="title">on</span>(<span class="params">type, handle</span>)</span>&#123;</span><br><span class="line">        (<span class="built_in">this</span>.eventInfo[type] || (<span class="built_in">this</span>.eventInfo[type] = [])).push(handle);</span><br><span class="line">    &#125;</span><br><span class="line">  	<span class="comment">/** 移除事件, </span></span><br><span class="line"><span class="comment">    	* - 如果没有参数, 移除所有事件, </span></span><br><span class="line"><span class="comment">      * - 如果只带有 事件名 参数, 就移除这个事件名下的所有事件,</span></span><br><span class="line"><span class="comment">      * - 如果带有 两个 参数, 那么就是表示移除某一个事件的具体处理函数</span></span><br><span class="line"><span class="comment">    * */</span></span><br><span class="line">    <span class="function"><span class="title">off</span>(<span class="params">type, handle</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!<span class="built_in">arguments</span>.length) &#123;</span><br><span class="line">            <span class="built_in">this</span>.eventInfo = &#123;&#125;</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span> (<span class="built_in">arguments</span>.length === <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="built_in">this</span>.eventInfo[type] = []</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span> (<span class="built_in">arguments</span>.length === <span class="number">2</span>) &#123;</span><br><span class="line">            <span class="keyword">const</span> len = <span class="built_in">this</span>.eventInfo[type].length;</span><br><span class="line">          	<span class="comment">// 倒着循环 数组的 序号不会受到影响</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">let</span> i = len - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">                <span class="keyword">if</span> (<span class="built_in">this</span>.eventInfo[type][i] === handle) &#123;<span class="comment">// 函数比较为引用类型比较的是引用地址</span></span><br><span class="line">                    <span class="built_in">this</span>.eventInfo[type].splice(i, <span class="number">1</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">   <span class="comment">/** </span></span><br><span class="line"><span class="comment">   		* 发射事件, 触发事件, 包装参数 传递给事件处理函数</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">    <span class="function"><span class="title">emit</span>(<span class="params">type</span>)</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> len = <span class="built_in">this</span>.eventInfo[type].length;</span><br><span class="line">        <span class="keyword">let</span> args = <span class="built_in">Array</span>.prototype.slice.call( <span class="built_in">arguments</span>, <span class="number">1</span> )</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; len; i++) &#123;</span><br><span class="line">           <span class="built_in">this</span>.eventInfo[type][i].apply( <span class="literal">null</span>, args );</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> event = <span class="keyword">new</span> Event()</span><br></pre></td></tr></table></figure>
 
@@ -635,22 +638,6 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">typeScript</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">react</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">GGEditor</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vue</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">html</a>
               </li>
              
@@ -663,7 +650,27 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">vue</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">react</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">webpack</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">typeScript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">GGEditor</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">vue3</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -672,10 +679,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">winged-cli</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">vue3</a>
               </li>
             
             <div class="clearfix"></div>
