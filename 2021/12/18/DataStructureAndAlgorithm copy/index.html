@@ -10,15 +10,15 @@
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="哈希表 哈希表是基于数组进行实现的，但相较于数组，有很多优势：   可以提供非常快速的插入-删除-查找操作 无论数据多少，插入和删除值需要接近常量时间：即 O(1)的时间极，实际上，只需要几个机械指令即可完成 速度比树还要快，基本可以瞬间查找到想要的元素 相对于树来说编码要容易多  缺点： 1. 无序存储的数据，不能以一种固定的方式（从大到小或从小到大）进行遍历；2. 不能存在相同的key，用于存">
+  <meta name="description" content="哈希表 哈希表是基于数组进行实现的，但相较于数组，有很多优势：">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数据结构与算法（中）">
 <meta property="og:url" content="http://example.com/2021/12/18/DataStructureAndAlgorithm%20copy/index.html">
 <meta property="og:site_name" content="Lin的博客">
-<meta property="og:description" content="哈希表 哈希表是基于数组进行实现的，但相较于数组，有很多优势：   可以提供非常快速的插入-删除-查找操作 无论数据多少，插入和删除值需要接近常量时间：即 O(1)的时间极，实际上，只需要几个机械指令即可完成 速度比树还要快，基本可以瞬间查找到想要的元素 相对于树来说编码要容易多  缺点： 1. 无序存储的数据，不能以一种固定的方式（从大到小或从小到大）进行遍历；2. 不能存在相同的key，用于存">
+<meta property="og:description" content="哈希表 哈希表是基于数组进行实现的，但相较于数组，有很多优势：">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-12-18T11:20:00.000Z">
-<meta property="article:modified_time" content="2022-02-21T07:29:03.764Z">
+<meta property="article:modified_time" content="2022-02-21T07:51:26.030Z">
 <meta property="article:author" content="web_lin">
 <meta property="article:tag" content="javaScript">
 <meta name="twitter:card" content="summary">
@@ -255,23 +255,26 @@
     <h3 id="哈希表"><a href="#哈希表" class="headerlink" title="哈希表"></a>哈希表</h3><blockquote>
 <p>哈希表是基于数组进行实现的，但相较于数组，有很多优势：</p>
 </blockquote>
+<span id="more"></span>
+
 <ol>
 <li>可以提供非常快速的插入-删除-查找操作</li>
 <li>无论数据多少，插入和删除值需要接近常量时间：即 O(1)的时间极，实际上，只需要几个机械指令即可完成</li>
 <li>速度比树还要快，基本可以瞬间查找到想要的元素</li>
-<li>相对于树来说编码要容易多</li>
+<li>相对于树来说编码要容易多<br><strong>缺点：</strong> 1. 无序存储的数据，不能以一种固定的方式（从大到小或从小到大）进行遍历；2. 不能存在相同的 key，用于存储不同的数据</li>
 </ol>
-<p><strong>缺点：</strong> 1. 无序存储的数据，不能以一种固定的方式（从大到小或从小到大）进行遍历；2. 不能存在相同的key，用于存储不同的数据</p>
 <h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><blockquote>
-<p>结构是数组，神奇的地方在于对下标值的一种变换，这种变换称之为哈希函数，通过哈希函数可以获取到HashCode。</p>
+<p>结构是数组，神奇的地方在于对下标值的一种变换，这种变换称之为哈希函数，通过哈希函数可以获取到 HashCode。</p>
 </blockquote>
-<h3 id="案列"><a href="#案列" class="headerlink" title="案列"></a>案列</h3><p>– 使用一种数据结构存储单词信息，比如有50000个单词，找到单词后每个单词有自己的翻译&amp;读音&amp;应用等等<br><strong>方案一：</strong> 设计一套自己的编码系统如a=1, b=2, c=3一次类推（不考虑大小写问题），z=26，空格用0表示。对应一个单词转成数字为字母对应数字总和。（数字相加）例如：cats = 3+1+20+19 = 43，将43作为单词下标存在数组中<br><strong>存在问题：</strong> 很多单词下标最终有可能都为43，由于一个下标值只能存储一个数据，必然会造成数据覆盖，这样存储多个单词显然不合理<br><strong>方案二：</strong> 幂的连乘，比如我们平时使用大于10的数字可以用幂的连乘表示他的唯一性，比如：7654= 7<em>10^3+6</em>10^2+5*10+4</p>
+<h3 id="案列"><a href="#案列" class="headerlink" title="案列"></a>案列</h3><blockquote>
+<p>使用一种数据结构存储单词信息，比如有 50000 个单词，找到单词后每个单词有自己的翻译&amp;读音&amp;应用等等<br><strong>方案一：</strong> 设计一套自己的编码系统如 a=1, b=2, c=3 一次类推（不考虑大小写问题），z=26，空格用 0 表示。对应一个单词转成数字为字母对应数字总和。（数字相加）例如：cats = 3+1+20+19 = 43，将 43 作为单词下标存在数组中<br><strong>存在问题：</strong> 很多单词下标最终有可能都为 43，由于一个下标值只能存储一个数据，必然会造成数据覆盖，这样存储多个单词显然不合理<br><strong>方案二：</strong> 幂的连乘，比如我们平时使用大于 10 的数字可以用幂的连乘表示他的唯一性，比如：7654= 7<em>10^3+6</em>10^2+5*10+4</p>
+</blockquote>
 <h3 id="哈希表的一些概念"><a href="#哈希表的一些概念" class="headerlink" title="哈希表的一些概念"></a>哈希表的一些概念</h3><ul>
 <li><strong>哈希化：</strong> 将大数字转化成数组范围内下标的过程</li>
 <li><strong>哈希函数：</strong> 通常我们会将单词转换成大数字，大数字进行哈希化的代码实现放在一个函数中，这个函数称为哈希函数</li>
 <li><strong>哈希表：</strong> 将最终数据插入到这个数组，对整个结构的封装，称之为一个哈希表</li>
 </ul>
-<p><strong>问题</strong> 尽管50000个单词，使用100000个位置来存储，并通过一种相比较好的哈希函数来完成，依然有可能会发生冲突。<br>如何解决这种冲突呢，有两种方案：</p>
+<p><strong>问题：</strong> 尽管 50000 个单词，使用 100000 个位置来存储，并通过一种相比较好的哈希函数来完成，依然有可能会发生冲突。<br>如何解决这种冲突呢，有两种方案：</p>
 <ol>
 <li>链地址法</li>
 <li>开放地址法</li>
@@ -584,15 +587,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">react</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">typeScript</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">GGEditor</a>
+                <a href="javascript:void(0)" class="js-tag color4">about me</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -612,11 +607,19 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">react</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">webpack</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">about me</a>
+                <a href="javascript:void(0)" class="js-tag color1">typeScript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">GGEditor</a>
               </li>
              
               <li class="article-tag-list-item">
