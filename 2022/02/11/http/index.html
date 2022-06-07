@@ -10,17 +10,17 @@
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="http 和 https基本概念 http： 是一个客户端和服务器端请求和应答的标准（TCP），用于从 WWW 服务器传输超文本到本地浏览器的超文本传输协议。https： 是以安全为目标的 HTTP 通道，即 HTTP 下 加入 SSL 层进行加密。其作用是：建立一个信息安全通道，来确保数据的传输，确保网站的真实性。  区别与优缺点 http 是超文本传输协议，信息是明文传输，HTTPS 协议要比">
+  <meta name="description" content="http 和 https基本概念 http： 是一个客户端和服务器端请求和应答的标准（TCP），用于从 WWW 服务器传输超文本到本地浏览器的超文本传输协议。https： 是以安全为目标的 HTTP 通道，即 HTTP 下 加入 SSL 层进行加密。其作用是：建立一个信息安全通道，来确保数据的传输，确保网站的真实性。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="http进阶">
 <meta property="og:url" content="http://example.com/2022/02/11/http/index.html">
 <meta property="og:site_name" content="Lin的博客">
-<meta property="og:description" content="http 和 https基本概念 http： 是一个客户端和服务器端请求和应答的标准（TCP），用于从 WWW 服务器传输超文本到本地浏览器的超文本传输协议。https： 是以安全为目标的 HTTP 通道，即 HTTP 下 加入 SSL 层进行加密。其作用是：建立一个信息安全通道，来确保数据的传输，确保网站的真实性。  区别与优缺点 http 是超文本传输协议，信息是明文传输，HTTPS 协议要比">
+<meta property="og:description" content="http 和 https基本概念 http： 是一个客户端和服务器端请求和应答的标准（TCP），用于从 WWW 服务器传输超文本到本地浏览器的超文本传输协议。https： 是以安全为目标的 HTTP 通道，即 HTTP 下 加入 SSL 层进行加密。其作用是：建立一个信息安全通道，来确保数据的传输，确保网站的真实性。">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5ba24e56c7c84bfda6b382cb08090961~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp">
 <meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9c1e1d4bd4c840428d5c87bdbfa9e4db~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp">
 <meta property="article:published_time" content="2022-02-11T11:50:00.000Z">
-<meta property="article:modified_time" content="2022-06-05T10:34:21.477Z">
+<meta property="article:modified_time" content="2022-06-07T01:18:02.021Z">
 <meta property="article:author" content="web_lin">
 <meta property="article:tag" content="http&#x2F;https">
 <meta property="article:tag" content="http1&#x2F;http2&#x2F;http3">
@@ -203,7 +203,7 @@
                                             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
                                         </div>
                                         <div id="js-content" class="content-ll">
-                                            <article id="post-http" class="article article-type-post " itemscope itemprop="blogPost">
+                                            <article id="page-http" class="article article-type-page " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
@@ -259,6 +259,8 @@
     <h3 id="http-和-https"><a href="#http-和-https" class="headerlink" title="http 和 https"></a>http 和 https</h3><h4 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h4><blockquote>
 <p><strong>http：</strong> 是一个客户端和服务器端请求和应答的标准（TCP），用于从 WWW 服务器传输超文本到本地浏览器的超文本传输协议。<br><strong>https：</strong> 是以安全为目标的 HTTP 通道，即 HTTP 下 加入 SSL 层进行加密。其作用是：建立一个信息安全通道，来确保数据的传输，确保网站的真实性。</p>
 </blockquote>
+<span id="more"></span>
+
 <h4 id="区别与优缺点"><a href="#区别与优缺点" class="headerlink" title="区别与优缺点"></a>区别与优缺点</h4><ul>
 <li>http 是超文本传输协议，信息是明文传输，HTTPS 协议要比 http 协议安全，https 是具有安全性的 ssl 加密传输协议，可防止数据在传输过程中被窃取、改变，确保数据的完整性。</li>
 <li>http 默认端口是 80，https 默认端口是 443</li>
@@ -365,9 +367,9 @@
 <li>多路复用容易 Timeout</li>
 </ul>
 <h3 id="http3"><a href="#http3" class="headerlink" title="http3"></a>http3</h3><blockquote>
-<p>Google 在推SPDY的时候就已经意识到了这些问题，于是就另起炉灶搞了一个基于 UDP 协议的“QUIC”协议，让HTTP跑在QUIC上而不是TCP上。而这个“HTTP over QUIC”就是HTTP协议的下一个大版本，HTTP/3。它在HTTP/2的基础上又实现了质的飞跃，真正“完美”地解决了“队头阻塞”问题。</p>
+<p>Google 在推 SPDY 的时候就已经意识到了这些问题，于是就另起炉灶搞了一个基于 UDP 协议的“QUIC”协议，让 HTTP 跑在 QUIC 上而不是 TCP 上。而这个“HTTP over QUIC”就是 HTTP 协议的下一个大版本，HTTP/3。它在 HTTP/2 的基础上又实现了质的飞跃，真正“完美”地解决了“队头阻塞”问题。</p>
 </blockquote>
-<p>上面我们提到QUIC基于UDP，而UDP是“无连接”的，根本就不需要“握手”和“挥手”，所以就比TCP来得快。此外QUIC也实现了可靠传输，保证数据一定能够抵达目的地。它还引入了类似HTTP/2的“流”和“多路复用”，单个“流”是有序的，可能会因为丢包而阻塞，但其他“流”不会受到影响。具体来说QUIC协议有以下特点：</p>
+<p>上面我们提到 QUIC 基于 UDP，而 UDP 是“无连接”的，根本就不需要“握手”和“挥手”，所以就比 TCP 来得快。此外 QUIC 也实现了可靠传输，保证数据一定能够抵达目的地。它还引入了类似 HTTP/2 的“流”和“多路复用”，单个“流”是有序的，可能会因为丢包而阻塞，但其他“流”不会受到影响。具体来说 QUIC 协议有以下特点：</p>
 
     
 
@@ -670,6 +672,10 @@
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">javaScript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">SEO</a>
               </li>
              
@@ -690,7 +696,19 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">javaScript</a>
+                <a href="javascript:void(0)" class="js-tag color4">about me</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">react</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">typeScript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">GGEditor</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -710,23 +728,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">react</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">webpack</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">about me</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">typeScript</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">GGEditor</a>
+                <a href="javascript:void(0)" class="js-tag color5">vue3</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -735,10 +741,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">winged-cli</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">vue3</a>
               </li>
             
             <div class="clearfix"></div>
